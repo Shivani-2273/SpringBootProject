@@ -29,6 +29,14 @@ public interface UserDAO extends JpaRepository<User, Integer> {
 	 */
 	User getUserByUserId(int userId);
 
+	
+	/**
+	 * @param isAdmin
+	 * @return
+	 */
+	List<User> findByIsAdmin(boolean isAdmin);
+	
+	
 	/**
 	 * @param email
 	 * @return
@@ -51,11 +59,13 @@ public interface UserDAO extends JpaRepository<User, Integer> {
 	List<Integer> getAddrId(@Param("userId") int userId);
 
 	/**
+	 * 
 	 * @param addressId
+	 * @param userId
 	 */
 	@Modifying
-	@Query("DELETE FROM Address addr WHERE addr.addressId NOT IN (:addrId)")
-	void deleteAddressById(@Param("addrId") List<Integer> addressId);
+	@Query("DELETE FROM Address addr WHERE addr.addressId NOT IN (:addrId) AND addr.user =:user")
+	void deleteAddressById(@Param("addrId") List<Integer> addressId, @Param("user") User userId);
 	
 	/**
 	 * @param startDate
@@ -64,4 +74,6 @@ public interface UserDAO extends JpaRepository<User, Integer> {
 	 */
 	@Query("SELECT u FROM User u WHERE u.isAdmin=0 AND DATE(u.updatedAt) BETWEEN :startDate AND :endDate")
 	List<User> getCSV(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+
+	
 }

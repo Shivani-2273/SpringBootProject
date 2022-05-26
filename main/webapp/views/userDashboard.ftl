@@ -55,7 +55,7 @@
 				<ul>
 					<li class="relative px-6 py-3"><a
 						class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-						href="editProfile?user=userEdit&id=${userProfile.userId!""}"> <svg class="w-5 h-5"
+						href="editProfile?user=userEdit&id=${userProfile.userId!''}"> <svg class="w-5 h-5"
 								aria-hidden="true" fill="none" stroke-linecap="round"
 								stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
 								stroke="currentColor">
@@ -169,24 +169,24 @@
 					<table class="table">						
 						
 								<tr  class="border-2">
-									<td class="font-bold border-2">Name</td><td class="border-2">${userProfile.firstName}</td>
+									<td class="font-bold border-2">Name</td><td class="border-2">${userProfile.firstName!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Email</td><td class="border-2">${userProfile.lastName}</td>
+									<td class="font-bold border-2">Email</td><td class="border-2">${userProfile.lastName!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Phone Number</td><td class="border-2">${userProfile.contactNo}</td>
+									<td class="font-bold border-2">Phone Number</td><td class="border-2">${userProfile.contactNo!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Gender</td><td class="border-2">${userProfile.gender}</td>
+									<td class="font-bold border-2">Gender</td><td class="border-2">${userProfile.gender!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Birth Date</td><td class="border-2">${userProfile.birthDate}</td>
+									<td class="font-bold border-2">Birth Date</td><td class="border-2">${userProfile.birthDate!""}</td>
 									
 								<tr  class="border-2">
-									<td class="font-bold border-2">Known Languages</td><td class="border-2">${userProfile.languages}</td>
+									<td class="font-bold border-2">Known Languages</td><td class="border-2">${userProfile.languages!""}</td>
 									
 								<tr  class="border-2">
-								<td class="font-bold border-2">Profile Image</td><td class="border-2"><img src="data:image/jpg;base64,${userProfile.base64Image}"  class="center"> </td>
+								<td class="font-bold border-2">Profile Image</td><td class="border-2"><img src="data:image/jpg;base64,${userProfile.base64Image!""}"  class="center"> </td>
 							
 						 	
-							  <#list userProfile.address as addressDetails>
+							  <#list userProfile.address![] as addressDetails>
 									<tr  class="border-2">
 									<td class="font-bold border-2">Address</td>
 									

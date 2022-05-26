@@ -11,9 +11,7 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.hibernate.Session;
-import org.hibernate.query.Query;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.usermanagement.DAO.UserDAO;
@@ -22,6 +20,8 @@ import com.usermanagement.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+	private static Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
 
 	@Autowired
 	UserDAO userDao;
@@ -33,64 +33,87 @@ public class UserServiceImpl implements UserService {
 			for (Address address : user.getAddress()) {
 				address.setUser(user);
 			}
+			
 			if (user.getUserId() != 0) {
 				for (Address address : user.getAddress()) {
-					addressIdList.add(address.getAddressId());
+					addressIdList.add(address.getAddressId());	
 				}
-				userDao.deleteAddressById(addressIdList);
-			}	
-			user.setAdmin(true);
+				userDao.deleteAddressById(addressIdList, user);
+			}
 			userDao.save(user);
-	
-
-	} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.info(e.toString());
 		}
+		
 	}
 
 	@Override
 	public User userLogin(User user) {
-		User userObj = userDao.findByEmailAndPassword(user.getEmail(), user.getPassword());
+		User userObj = null;
+		try {
+			userObj = userDao.findByEmailAndPassword(user.getEmail(), user.getPassword());
+		} catch (Exception e) {
+			logger.info(e.toString());
+		}
 		return userObj;
 
 	}
 
 	@Override
 	public List<User> getAllUser() {
-		List<User> userList = userDao.findAll();
+		List<User> userList = null;
+		try {
+			userList = userDao.findByIsAdmin(false);
+		} catch (Exception e) {
+			logger.info(e.toString());
+		}
 		return userList;
 	}
 
 	@Override
-	public User getUserAddress(int userId) {
-		User addressList = userDao.getUserByUserId(userId);
-		return addressList;
-	}
-
-	@Override
 	public void deleteUser(int userId) {
-		userDao.deleteById(userId);
+		try {
+			userDao.deleteById(userId);
+		} catch (Exception e) {
+			logger.info(e.toString());
+		}
 	}
 
 	@Override
 	public User displayUser(int userId) {
-		User userData = userDao.getUserByUserId(userId);
+		User userData = null;
+		try {
+			userData = userDao.getUserByUserId(userId);
+		} catch (Exception e) {
+			logger.info(e.toString());
+		}
 		return userData;
 	}
 
 	@Override
 	public boolean checkEmail(String email) {
-		List<User> emails = userDao.findByEmail(email);
-		if (!emails.isEmpty()) {
-			return true;
-		} else {
-			return false;
+		List<User> emails = null;
+		try {
+			emails = userDao.findByEmail(email);
+			if (!emails.isEmpty()) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			logger.info(e.toString());
 		}
+		return false;
+
 	}
 
 	@Override
 	public void resetPassword(User user) {
-		userDao.updatePassword(user.getEmail(), user.getPassword());
+		try {
+			userDao.updatePassword(user.getEmail(), user.getPassword());
+		} catch (Exception e) {
+			logger.info(e.toString());
+		}
 	}
 
 	@Override
@@ -105,7 +128,7 @@ public class UserServiceImpl implements UserService {
 		fw.append("Date/Time");
 		fw.append('\n');
 		try {
-			List<User> userList=userDao.getCSV(startDate,endDate);
+			List<User> userList = userDao.getCSV(startDate, endDate);
 			for (User userData : userList) {
 				fw.append(userData.getFirstName());
 				fw.append(',');
@@ -118,9 +141,9 @@ public class UserServiceImpl implements UserService {
 			fw.flush();
 			fw.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.info(e.toString());
 		}
-		
+
 	}
 
 }

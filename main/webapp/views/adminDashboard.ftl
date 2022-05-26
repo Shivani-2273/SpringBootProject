@@ -230,21 +230,21 @@
 							
 								
 								<tr  class="border-2">
-									<td class="font-bold border-2">Name</td><td class="border-2">${adminProfile.firstName}</td>
+									<td class="font-bold border-2">Name</td><td class="border-2">${adminProfile.firstName!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Email</td><td class="border-2">${adminProfile.lastName}</td>
+									<td class="font-bold border-2">Email</td><td class="border-2">${adminProfile.lastName!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Phone Number</td><td class="border-2">${adminProfile.contactNo}</td>
+									<td class="font-bold border-2">Phone Number</td><td class="border-2">${adminProfile.contactNo!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Gender</td><td class="border-2">${adminProfile.gender}</td>
+									<td class="font-bold border-2">Gender</td><td class="border-2">${adminProfile.gender!""}</td>
 								<tr  class="border-2">
-									<td class="font-bold border-2">Birth Date</td><td class="border-2">${adminProfile.birthDate}</td>
+									<td class="font-bold border-2">Birth Date</td><td class="border-2">${adminProfile.birthDate!""}</td>
 									
 								<tr  class="border-2">
-									<td class="font-bold border-2">Known Languages</td><td class="border-2">${adminProfile.languages}</td>
+									<td class="font-bold border-2">Known Languages</td><td class="border-2">${adminProfile.languages!""}</td>
 									
 								<tr  class="border-2">
-								<td class="font-bold border-2">Profile Image</td><td class="border-2"><img src="data:image/jpg;base64,${adminProfile.base64Image}"  class="center"> </td>	
+								<td class="font-bold border-2">Profile Image</td><td class="border-2"><img src="data:image/jpg;base64,${adminProfile.base64Image!""}"  class="center"> </td>	
 								
 					
 							

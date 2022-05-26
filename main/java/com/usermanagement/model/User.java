@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
@@ -31,23 +34,33 @@ public class User {
 	private boolean isAdmin;
 
 	@Column(name = "first_name", nullable = false)
+	@NotNull(message = "First name can not be null")
 	private String firstName;
 
 	@Column(name = "last_name")
+	@NotNull(message = "last name can not be null")
 	private String lastName;
 
+	@Email(message = "Email should be valid")
+	@NotNull(message = "Email can not be null")
 	private String email;
 
+	@NotNull(message = "Password can not be null")
 	private String password;
 
 	@Column(name = "contact_no")
+	@NotNull(message = "Phone number can not be null")
+	@Size(min = 10, max = 10, message = "Phone number should be of 10 digit")
 	private String contactNo;
 
+	@NotNull(message = "Please select gender")
 	private String gender;
 
 	@Column(name = "birth_date")
+	@NotNull(message = "Please select birthdate")
 	private String birthDate;
 
+	@NotNull(message = "Please select atleast one language")
 	private String languages;
 
 	@CreationTimestamp
@@ -206,8 +219,12 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password + "]";
+		return "User [userId=" + userId + ", isAdmin=" + isAdmin + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", password=" + password + ", contactNo=" + contactNo + ", gender=" + gender
+				+ ", birthDate=" + birthDate + ", languages=" + languages + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", address=" + address + "]";
 	}
+	
 	
 
 		

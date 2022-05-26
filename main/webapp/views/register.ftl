@@ -430,7 +430,7 @@ $(document).ready(function(){
 	<script src="https://cdn.ckeditor.com/4.5.1/standard/ckeditor.js"></script>
 	
 	<script type="text/javascript" src="/js/cloneData.js"></script>
-	<script type="text/javascript" src="/js/validation.js"></script>
+	 <script type="text/javascript" src="/js/validation.js"></script>
 	
 <script type="text/javascript">
 		$(document).ready(function() {	

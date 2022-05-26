@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Address {
@@ -17,9 +19,17 @@ public class Address {
 	private int addressId;
 
 	@Column(name = "street_line")
+	@NotNull(message ="Please enter street line")
 	private String addressLine;
+	
+	@NotNull(message="Please select city")
 	private String city;
+	
+	@NotNull(message="Please select state")
 	private String state;
+	
+	@NotNull(message="Please enter pin")
+	@Size(min = 6, max = 6, message = "Pin number should be of 6 digit")
 	private String pin;
 
 	
@@ -96,11 +106,7 @@ public class Address {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Address [addressId=" + addressId + ", addressLine=" + addressLine + ", city=" + city + ", state="
-				+ state + ", pin=" + pin + "]";
-	}
+	
 
 
 	
